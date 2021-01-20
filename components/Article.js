@@ -86,6 +86,23 @@ const data = [
     thirdParagraph: `Hodor hodor - hodor... Hodor hodor hodor hodor. Hodor. Hodor! Hodor hodor, hodor hodor hodor hodor hodor; hodor hodor? Hodor!
           Hodor hodor, HODOR hodor, hodor hodor?! Hodor! Hodor hodor, HODOR hodor, hodor hodor, hodor, hodor hodor. Hodor, hodor.
           Hodor. Hodor, hodor, hodor. Hodor hodor... Hodor hodor hodor?! Hodor, hodor... Hodor hodor HODOR hodor, hodor hodor. Hodor.`
+  },
+
+  {
+    title: 'New Paragraph',
+    date: 'Jan 2021',
+    firstParagraph: `Cool hodor HODOR! Hodor hodor - hodor, hodor. Hodor hodor... Hodor hodor hodor; hodor hodor. Hodor hodor hodor, hodor, hodor
+          hodor. Hodor, hodor. Hodor. Hodor, hodor - hodor... Hodor hodor hodor; hodor HODOR hodor, hodor hodor?! Hodor hodor, hodor.
+          Hodor hodor hodor hodor hodor! Hodor hodor - HODOR hodor, hodor hodor hodor hodor hodor; hodor hodor? `,
+
+    secondParagraph: `Cool, hodor. Hodor. Hodor, hodor, hodor. Hodor hodor, hodor. Hodor hodor, hodor, hodor hodor. Hodor! Hodor hodor, hodor;
+          hodor hodor hodor? Hodor, hodor. Hodor. Hodor, hodor - HODOR hodor, hodor hodor hodor! Hodor, hodor. Hodor. Hodor, HODOR
+          hodor, hodor hodor, hodor, hodor hodor. Hodor hodor - hodor - hodor... Hodor hodor hodor hodor hodor hodor hodor?! Hodor
+          hodor - hodor hodor hodor. Hodor. Hodor hodor... Hodor hodor hodor hodor hodor? `,
+
+    thirdParagraph: `Cool hodor - hodor... Hodor hodor hodor hodor. Hodor. Hodor! Hodor hodor, hodor hodor hodor hodor hodor; hodor hodor? Hodor!
+          Hodor hodor, HODOR hodor, hodor hodor?! Hodor! Hodor hodor, HODOR hodor, hodor hodor, hodor, hodor hodor. Hodor, hodor.
+          Hodor. Hodor, hodor, hodor. Hodor hodor... Hodor hodor hodor?! Hodor, hodor... Hodor hodor HODOR hodor, hodor hodor. Hodor.`
   }
 ];
 
@@ -114,3 +131,49 @@ const data = [
   Step 5: Try adding new article object to the data array. Make sure it is in the same format as the others.
   Refresh the page to see the new article.
 */
+
+const articleMaker = function(article) {
+
+  const articleDiv  = document.createElement("div");
+  const articleTitle = document.createElement("h2")
+  const articleDate = document.createElement("p")
+  const paraOne = document.createElement("p")
+  const paraTwo = document.createElement("p")
+  const paraThree = document.createElement("p")
+  const articleButton = document.createElement("span");
+
+  articleDiv.classList.add("article");
+  articleDate.classList.add("date");
+  articleButton.classList.add("expandButton");
+
+  articleTitle.textContent = article.title;
+  articleDate.textContent = article.date;
+  paraOne.textContent = article.firstParagraph;
+  paraTwo.textContent = article.secondParagraph
+  paraThree.textContent = article.thirdParagraph;
+  articleButton.textContent = "+"
+
+
+  articleDiv.appendChild(articleTitle);
+  articleDiv.appendChild(articleDate);
+  articleDiv.appendChild(paraOne);
+  articleDiv.appendChild(paraTwo);
+  articleDiv.appendChild(paraThree);
+  articleDiv.appendChild(articleButton);
+
+  function toggleParas(event) {
+    articleDiv.classList.toggle('article-open');
+  }
+
+  articleButton.addEventListener("click", toggleParas)
+
+  return articleDiv;
+
+}
+
+const articlesDiv = document.querySelector(".articles")
+
+data.map(article => {
+  const newArticle = articleMaker(article);
+  articlesDiv.appendChild(newArticle);
+})
